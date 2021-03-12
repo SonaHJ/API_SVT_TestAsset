@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<editableResource createdTimestamp="1593168787950"
+    createdUser="JAMES.THOMSON" id="47c2ee9c:172f0425895:-7e1b"
+    selfDescribing="www.google.com (172.217.10.36) - Windows Performance Monitor (default)"
+    type="probe_resource" updatedTimestamp="1593168787950"
+    updatedUser="JAMES.THOMSON" version="1.0">
+    <loggingConfiguration debug="false" writeStubEventsToDB="false"/>
+    <resourceConfig defaultFlag="true" name="default"
+        physicalResourceID="47c2ee9c:172f0425895:-7e21" probeID="ghviewer.plugin.perfmon">
+        <PerfMonDatasource configuration="default"/>
+    </resourceConfig>
+</editableResource>

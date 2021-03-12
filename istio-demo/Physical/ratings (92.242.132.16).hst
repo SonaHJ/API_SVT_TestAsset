@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<editableResource createdTimestamp="1588112022502"
+    createdUser="JAMES.THOMSON" id="-676511cf:171c2bec3fc:-7c4a"
+    selfDescribing="ratings (92.242.132.16)"
+    type="host_machine_resource" updatedTimestamp="1588112022502"
+    updatedUser="JAMES.THOMSON" version="1.0">
+    <loggingConfiguration debug="false" writeStubEventsToDB="false"/>
+    <resourceConfig host_address="92.242.132.16" user_host_name="ratings">
+        <roles>
+            <identity name="ssh" port="22"/>
+        </roles>
+    </resourceConfig>
+</editableResource>

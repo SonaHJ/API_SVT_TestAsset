@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<editableResource createdTimestamp="1614012597660"
+    createdUser="RICHARD.LITTLEJR" id="-b689a4e:177ca90867a:-7d3c"
+    selfDescribing="in-stub123.10.134.59.250.nip.io (10.134.59.250) - System Statistics (default)"
+    type="probe_resource" updatedTimestamp="1614012597660"
+    updatedUser="RICHARD.LITTLEJR" version="1.0">
+    <loggingConfiguration debug="false" writeStubEventsToDB="false"/>
+    <resourceConfig defaultFlag="true" name="default"
+        physicalResourceID="-b689a4e:177ca90867a:-7d4a" probeID="plugin.custom.SysStat">
+        <SysStatDatasource allProcesses="true" configuration="default"/>
+    </resourceConfig>
+</editableResource>

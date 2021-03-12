@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<editableResource createdTimestamp="1592825237500"
+    createdUser="JAMES.THOMSON" id="54327d98:172dbc8470d:-7e35"
+    selfDescribing="www.google.com (216.239.38.120)"
+    type="host_machine_resource" updatedTimestamp="1592825237500"
+    updatedUser="JAMES.THOMSON" version="1.0">
+    <loggingConfiguration debug="false" writeStubEventsToDB="false"/>
+    <resourceConfig host_address="216.239.38.120" user_host_name="www.google.com">
+        <roles>
+            <identity name="ssh" port="22"/>
+        </roles>
+    </resourceConfig>
+</editableResource>

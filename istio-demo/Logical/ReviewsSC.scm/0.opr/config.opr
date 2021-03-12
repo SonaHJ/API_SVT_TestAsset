@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<editableResource createdTimestamp="1613752572750" createdUser="root"
+    id="-3c7187cf:177bafd332e:-76b0" type="operation_resource"
+    updatedTimestamp="1613752572750" updatedUser="root" version="1.0">
+    <loggingConfiguration debug="false" writeStubEventsToDB="false"/>
+    <resourceConfig avgTime="0" color="90,170,250"
+        dependencies="-8741b6f:1720d228ea7:-7e13"
+        invokeDynamicFormatterID="http.text.message.type"
+        invokeEndDynamicFormatterID="http.text.message.type"
+        invokeEndFormatterID="HTTP_Message"
+        invokeEndTransportID="-8741b6f:1720d228ea7:-7e13"
+        invokeFormatterID="HTTP_Message"
+        invokeTransportID="-8741b6f:1720d228ea7:-7e13" maxTime="0"
+        mepEndSchemaID="JSON"
+        mepEndSchemaNodeFormatter="JSON.nodeformatter"
+        mepEndSchemaroot="Object" mepEndUsed="true" mepType="IN_OUT"
+        minTime="0" stubDynamicFormatterID="http.text.message.type"
+        stubFormatterID="HTTP_Message" stubTransportID="-8741b6f:1720d228ea7:-7e13">
+        <invokeHeaderNode meTy="Message" name="" type="12" version="1.2">
+            <fieldActionGroup>
+                <fieldAction enabled="false" type="1">
+                    <fieldAction anyOrder="false" enabled="false"
+                        ignoreExtra="false" ignoreNonPresent="false" type="100"/>
+                </fieldAction>
+            </fieldActionGroup>
+            <_c meTy="String" name="Method" type="7" value="GET" version="1.2">
+                <fieldActionGroup>
+                    <fieldAction type="0">
+                        <fieldAction exp="GET" type="0"/>
+                    </fieldAction>
+                </fieldActionGroup>
+            </_c>
+            <_c meTy="String" name="URL" type="7" value="/reviews/0" version="1.2">
+                <fieldActionGroup>
+                    <fieldAction type="0">
+                        <fieldAction exp="/reviews/0" type="0"/>
+                    </fieldAction>
+                </fieldActionGroup>
+            </_c>
+            <_c meTy="Message" name="httpDetails" type="12" version="1.2">
+                <fieldActionGroup>
+                    <fieldAction enabled="false" type="1">
+                        <fieldAction anyOrder="false" enabled="false"
+                            ignoreExtra="false" ignoreNonPresent="false" type="100"/>
+                    </fieldAction>
+                </fieldActionGroup>
+                <_c meTy="Message" name="httpHeaders" type="12" version="1.2">
+                    <fieldActionGroup>
+                        <fieldAction enabled="false" type="1">
+                            <fieldAction anyOrder="false"
+                                enabled="false" ignoreExtra="false"
+                                ignoreNonPresent="false" type="100"/>
+                        </fieldAction>
+                    </fieldActionGroup>
+                    <_c meTy="String" name="x-envoy-peer-metadata-id"
+                        type="7"
+                        value="sidecar~10.42.0.50~productpage-v1-65576bb7bf-ll2tz.bookinfo~bookinfo.svc.cluster.local" version="1.2">
+                        <fieldActionGroup>
+                            <fieldAction type="0">
+                                <fieldAction
+                                    exp="sidecar~10.42.0.50~productpage-v1-65576bb7bf-ll2tz.bookinfo~bookinfo.svc.cluster.local" type="0"/>
+                            </fieldAction>
+                        </fieldActionGroup>
+                    </_c>
+                    <_c meTy="String" name="x-envoy-decorator-operation"
+                        type="7"
+                        value="reviews.bookinfo.svc.cluster.local:9080/*" version="1.2">
+                        <fieldActionGroup>
+                            <fieldAction type="0">
+                                <fieldAction
+                                    exp="reviews.bookinfo.svc.cluster.local:9080/*" type="0"/>
+                            </fieldAction>
+                        </fieldActionGroup>
+                    </_c>
+                    <_c meTy="String" name="x-envoy-peer-metadata"
+                        type="7"
+                        value="Ch8KDkFQUF9DT05UQUlORVJTEg0aC3Byb2R1Y3RwYWdlChoKCkNMVVNURVJfSUQSDBoKS3ViZXJuZXRlcwoYCg1JU1RJT19WRVJTSU9OEgcaBTEuOC4wCvgBCgZMQUJFTFMS7QEq6gEKFAoDYXBwEg0aC3Byb2R1Y3RwYWdlChkKDGlzdGlvLmlvL3JldhIJGgdkZWZhdWx0CiEKEXBvZC10ZW1wbGF0ZS1oYXNoEgwaCjY1NTc2YmI3YmYKJAoZc2VjdXJpdHkuaXN0aW8uaW8vdGxzTW9kZRIHGgVpc3RpbwowCh9zZXJ2aWNlLmlzdGlvLmlvL2Nhbm9uaWNhbC1uYW1lEg0aC3Byb2R1Y3RwYWdlCisKI3NlcnZpY2UuaXN0aW8uaW8vY2Fub25pY2FsLXJldmlzaW9uEgQaAnYxCg8KB3ZlcnNpb24SBBoCdjEKGgoHTUVTSF9JRBIPGg1jbHVzdGVyLmxvY2FsCikKBE5BTUUSIRofcHJvZHVjdHBhZ2UtdjEtNjU1NzZiYjdiZi1sbDJ0egoXCglOQU1FU1BBQ0USChoIYm9va2luZm8KUwoFT1dORVISShpIa3ViZXJuZXRlczovL2FwaXMvYXBwcy92MS9uYW1lc3BhY2VzL2Jvb2tpbmZvL2RlcGxveW1lbnRzL3Byb2R1Y3RwYWdlLXYxChcKEVBMQVRGT1JNX01FVEFEQVRBEgIqAAohCg1XT1JLTE9BRF9OQU1FEhAaDnByb2R1Y3RwYWdlLXYx" version="1.2">
+                        <fieldActionGroup>
+                            <fieldAction type="0">
+                                <fieldAction
+                                    exp="Ch8KDkFQUF9DT05UQUlORVJTEg0aC3Byb2R1Y3RwYWdlChoKCkNMVVNURVJfSUQSDBoKS3ViZXJuZXRlcwoYCg1JU1RJT19WRVJTSU9OEgcaBTEuOC4wCvgBCgZMQUJFTFMS7QEq6gEKFAoDYXBwEg0aC3Byb2R1Y3RwYWdlChkKDGlzdGlvLmlvL3JldhIJGgdkZWZhdWx0CiEKEXBvZC10ZW1wbGF0ZS1oYXNoEgwaCjY1NTc2YmI3YmYKJAoZc2VjdXJpdHkuaXN0aW8uaW8vdGxzTW9kZRIHGgVpc3RpbwowCh9zZXJ2aWNlLmlzdGlvLmlvL2Nhbm9uaWNhbC1uYW1lEg0aC3Byb2R1Y3RwYWdlCisKI3NlcnZpY2UuaXN0aW8uaW8vY2Fub25pY2FsLXJldmlzaW9uEgQaAnYxCg8KB3ZlcnNpb24SBBoCdjEKGgoHTUVTSF9JRBIPGg1jbHVzdGVyLmxvY2FsCikKBE5BTUUSIRofcHJvZHVjdHBhZ2UtdjEtNjU1NzZiYjdiZi1sbDJ0egoXCglOQU1FU1BBQ0USChoIYm9va2luZm8KUwoFT1dORVISShpIa3ViZXJuZXRlczovL2FwaXMvYXBwcy92MS9uYW1lc3BhY2VzL2Jvb2tpbmZvL2RlcGxveW1lbnRzL3Byb2R1Y3RwYWdlLXYxChcKEVBMQVRGT1JNX01FVEFEQVRBEgIqAAohCg1XT1JLTE9BRF9OQU1FEhAaDnByb2R1Y3RwYWdlLXYx" type="0"/>
+                            </fieldAction>
+                        </fieldActionGroup>
+                    </_c>
+                </_c>
+            </_c>
+            <_c meTy="String" name="MessageType" type="7"
+                value="http.text.message.type" version="1.2">
+                <fieldActionGroup>
+                    <fieldAction type="0">
+                        <fieldAction exp="http.text.message.type" type="0"/>
+                    </fieldAction>
+                </fieldActionGroup>
+            </_c>
+        </invokeHeaderNode>
+        <stubHeaderConfig>
+            <_c MessageType="http.text.message.type" Method="GET"
+                URL="/reviews/0" allowSubPath="false"
+                consumerType="Participate" filterHeaders="true"
+                filterMethod="true" filterResourcePath="true">
+                <filterHeadersList>
+                    <header disabled="true"
+                        name="x-envoy-peer-metadata-id" type="7" value="sidecar~10.42.0.50~productpage-v1-65576bb7bf-ll2tz.bookinfo~bookinfo.svc.cluster.local"/>
+                    <header disabled="true"
+                        name="x-envoy-decorator-operation" type="7" value="reviews.bookinfo.svc.cluster.local:9080/*"/>
+                    <header disabled="true" name="x-envoy-peer-metadata"
+                        type="7" value="Ch8KDkFQUF9DT05UQUlORVJTEg0aC3Byb2R1Y3RwYWdlChoKCkNMVVNURVJfSUQSDBoKS3ViZXJuZXRlcwoYCg1JU1RJT19WRVJTSU9OEgcaBTEuOC4wCvgBCgZMQUJFTFMS7QEq6gEKFAoDYXBwEg0aC3Byb2R1Y3RwYWdlChkKDGlzdGlvLmlvL3JldhIJGgdkZWZhdWx0CiEKEXBvZC10ZW1wbGF0ZS1oYXNoEgwaCjY1NTc2YmI3YmYKJAoZc2VjdXJpdHkuaXN0aW8uaW8vdGxzTW9kZRIHGgVpc3RpbwowCh9zZXJ2aWNlLmlzdGlvLmlvL2Nhbm9uaWNhbC1uYW1lEg0aC3Byb2R1Y3RwYWdlCisKI3NlcnZpY2UuaXN0aW8uaW8vY2Fub25pY2FsLXJldmlzaW9uEgQaAnYxCg8KB3ZlcnNpb24SBBoCdjEKGgoHTUVTSF9JRBIPGg1jbHVzdGVyLmxvY2FsCikKBE5BTUUSIRofcHJvZHVjdHBhZ2UtdjEtNjU1NzZiYjdiZi1sbDJ0egoXCglOQU1FU1BBQ0USChoIYm9va2luZm8KUwoFT1dORVISShpIa3ViZXJuZXRlczovL2FwaXMvYXBwcy92MS9uYW1lc3BhY2VzL2Jvb2tpbmZvL2RlcGxveW1lbnRzL3Byb2R1Y3RwYWdlLXYxChcKEVBMQVRGT1JNX01FVEFEQVRBEgIqAAohCg1XT1JLTE9BRF9OQU1FEhAaDnByb2R1Y3RwYWdlLXYx"/>
+                </filterHeadersList>
+            </_c>
+        </stubHeaderConfig>
+    </resourceConfig>
+</editableResource>

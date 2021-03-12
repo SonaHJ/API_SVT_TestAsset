@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<editableResource createdTimestamp="1613750700488" createdUser="root"
+    id="-3c7187cf:177bafd332e:-7bf8"
+    type="infrastructure_component_resource"
+    updatedTimestamp="1613750700488" updatedUser="root" version="1.1">
+    <loggingConfiguration debug="false" writeStubEventsToDB="false"/>
+    <resourceConfig infrastructureType="http_transport">
+        <recordingSettings colour="124,199,255"/>
+    </resourceConfig>
+</editableResource>

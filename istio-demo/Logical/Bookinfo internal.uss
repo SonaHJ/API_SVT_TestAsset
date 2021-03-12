@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<editableResource createdTimestamp="1588112828661"
+    createdUser="JAMES.THOMSON" id="-1e467d01:171c2dc91c6:-7c8d"
+    selfDescribing="Bookinfo internal" type="parameterized_url_schema"
+    updatedTimestamp="1588112828661" updatedUser="JAMES.THOMSON" version="1.0">
+    <loggingConfiguration debug="false" writeStubEventsToDB="false"/>
+    <resourceConfig schemaSourceTemplateName="URL">
+        <schemaSourceConfig basePath="" name="Bookinfo internal">
+            <url templateName="ratings">
+                <path isExpandable="false" isParameterized="false"
+                    isParticipateToExpension="true" literal="/"
+                    parameterName="" type="7"/>
+                <path isExpandable="false" isParameterized="false"
+                    isParticipateToExpension="true" literal="ratings"
+                    parameterName="ratings" type="7"/>
+                <path isExpandable="false" isParameterized="false"
+                    isParticipateToExpension="true" literal="/"
+                    parameterName="" type="7"/>
+                <path isExpandable="true" isParameterized="true"
+                    isParticipateToExpension="true" literal="10"
+                    parameterName="id" type="2"/>
+            </url>
+        </schemaSourceConfig>
+    </resourceConfig>
+</editableResource>

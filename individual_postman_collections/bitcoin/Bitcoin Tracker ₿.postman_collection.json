@@ -1,0 +1,506 @@
+{
+	"info": {
+		"_postman_id": "e2ca18dd-4a94-487b-89b9-31b9a9eb1264",
+		"name": "Bitcoin Tracker ₿",
+		"description": "The Bitcoin Tracker is a Postman collection that compares the current Bitcoin exchange rate with a target value. If the current Bitcoin rate drops below this target (like in a flash crash), you will receive an SMS alert.\n\nYou can run the collection locally with the Postman collection runner or [Newman](https://www.getpostman.com/docs/v6/api_testing_and_collection_runner/newman_intro) command line tool, or run the collection on the Postman cloud with a [monitor](https://www.getpostman.com/docs/v6/postman/monitors/intro_monitors).\n\n**Legal disclaimer:** Cryptocurrencies are volatile. Postman assumes no ownership (or liability) in all the $$$ you make (or lose). Gamble responsibly!\n\n**To make money:** Running this collection once or twice won't help you make it rain ????. If you're using a Postman monitor, set the frequency to run this check periodically. If you're using the Newman command line tool, write a shell script to set up a cron job that runs the collection periodically.\n\n### Quickstart\n\nBefore you can run the Bitcoin Tracker collection, you need to [create or update an environment](https://www.getpostman.com/docs/v6/postman/environments_and_globals/manage_environments). Add the following required variables to a new environment, or update the `Bitcoin Tracker.template` environment you downloaded with the **Run in Postman** button:\n\n|Environment Variable Name |Description\n|--------------------------|--------------\n|`twilioAccountSID`            |A [Twilio Account SID](https://www.twilio.com/console/project/settings)\n|`twilioAuthToken`        |A [Twilio Auth Token](https://www.twilio.com/console/project/settings)\n|`targetRate`                |Set a target rate. If the current Bitcoin rate drops below this target, the `POST` request to the Twilio API will be called.\n\n### Twilio credentials\n\nYou will need a [Twilio Account SID](https://www.twilio.com/console/project/settings) to add or update the `twilioAccountSID` value within the Postman environment. You will need a [Twilio Auth Token](https://www.twilio.com/console/project/settings) to add or update the `twilioAuthToken` value within the Postman environment.\n\n![[twilio console](https://s3.amazonaws.com/postman-static-getpostman-com/postman-docs/twilioAuth_censored.jpg)](https://s3.amazonaws.com/postman-static-getpostman-com/postman-docs/twilioAuth_censored.jpg)\n\n### Enter a target rate\n\nYou will need to set a target rate by adding or updating the `targetRate` value within the Postman environment. If the current Bitcoin rate drops below this target, the `POST` request to the Twilio API will be called.\n\n",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get Bitcoin Exchange Rate",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "ef9650dd-0ab0-41d3-9356-225c9503a701",
+						"exec": [
+							"// ensure healthy response code",
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"let target = pm.environment.get(\"targetRate\");",
+							"",
+							"try {",
+							"    ",
+							"    // parse the response object",
+							"    let response = pm.response.json();",
+							"    ",
+							"    // extract information from the response",
+							"    let time = response.time.updated;",
+							"    let usdRate = response.bpi.USD.rate;",
+							"    console.log(\"let's take a look at the usdRate in INT: \" + parseInt(usdRate));",
+							"    ",
+							"    // if the current rate of Bitcoin is lower than my target",
+							"    if (parseInt(usdRate) < parseInt(target)) {",
+							"        ",
+							"        console.log(\"Yay. The current Bitcoin rate (\" + usdRate + \") is lower than my target threshold (\" + target + \").\");",
+							"        ",
+							"        // set the next request to be called (if run together as collection): send an SMS",
+							"        postman.setNextRequest('SMS via Twilio');",
+							"        ",
+							"        // set environment variables to be used in subsequent request",
+							"        pm.environment.set(\"time\", time);",
+							"        pm.environment.set(\"rate\", usdRate);",
+							"        ",
+							"    } else { ",
+							"        ",
+							"        console.log(\"Boo. The current Bitcoin rate (\" + usdRate + \") is higher than my target threshold (\" + target + \").\");",
+							"        ",
+							"        // terminate the process, so no other requests are made as part of this collection run",
+							"        postman.setNextRequest(null);",
+							"    }",
+							"    ",
+							"}",
+							"catch (error) {",
+							"    throw error;",
+							"}",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.coindesk.com/v1/bpi/currentprice.json",
+					"protocol": "https",
+					"host": [
+						"api",
+						"coindesk",
+						"com"
+					],
+					"path": [
+						"v1",
+						"bpi",
+						"currentprice.json"
+					]
+				},
+				"description": "CoinDesk provides a simple API to make its [Bitcoin Price Index (BPI)](https://www.coindesk.com/price/) data programmatically available to others. Data is returned in JSON format.\n\nRead more about the [Coindesk API](https://www.coindesk.com/api/)."
+			},
+			"response": [
+				{
+					"name": "Successful response",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://api.coindesk.com/v1/bpi/currentprice.json",
+							"protocol": "https",
+							"host": [
+								"api",
+								"coindesk",
+								"com"
+							],
+							"path": [
+								"v1",
+								"bpi",
+								"currentprice.json"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*",
+							"name": "Access-Control-Allow-Origin",
+							"description": "Specifies a URI that may access the resource. For requests without credentials, the server may specify '*' as a wildcard, thereby allowing any origin to access the resource."
+						},
+						{
+							"key": "CF-Cache-Status",
+							"value": "HIT",
+							"name": "CF-Cache-Status",
+							"description": "Custom header"
+						},
+						{
+							"key": "CF-RAY",
+							"value": "3fb16a878b156d84-SJC",
+							"name": "CF-RAY",
+							"description": "Custom header"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "public, max-age=30",
+							"name": "Cache-Control",
+							"description": "Tells all caching mechanisms from server to client whether they may cache this object. It is measured in seconds"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive",
+							"name": "Connection",
+							"description": "Options that are desired for the connection"
+						},
+						{
+							"key": "Content-Encoding",
+							"value": "gzip",
+							"name": "Content-Encoding",
+							"description": "The type of encoding used on the data."
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/javascript",
+							"name": "Content-Type",
+							"description": "The mime type of this content"
+						},
+						{
+							"key": "Date",
+							"value": "Tue, 13 Mar 2018 20:58:00 GMT",
+							"name": "Date",
+							"description": "The date and time that the message was sent"
+						},
+						{
+							"key": "Expect-CT",
+							"value": "max-age=604800, report-uri=\"https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct\"",
+							"name": "Expect-CT",
+							"description": "Custom header"
+						},
+						{
+							"key": "Expires",
+							"value": "Tue, 13 Mar 2018 20:58:30 GMT",
+							"name": "Expires",
+							"description": "Gives the date/time after which the response is considered stale"
+						},
+						{
+							"key": "Server",
+							"value": "cloudflare",
+							"name": "Server",
+							"description": "A name for the server"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked",
+							"name": "Transfer-Encoding",
+							"description": "The form of encoding used to safely transfer the entity to the user. Currently defined methods are: chunked, compress, deflate, gzip, identity."
+						},
+						{
+							"key": "Vary",
+							"value": "Accept-Encoding",
+							"name": "Vary",
+							"description": "Tells downstream proxies how to match future request headers to decide whether the cached response can be used rather than requesting a fresh one from the origin server."
+						},
+						{
+							"key": "Via",
+							"value": "1.1 4348c0c454083374c2bcb41d878f5dd5.cloudfront.net (CloudFront)",
+							"name": "Via",
+							"description": "Informs the client of proxies through which the response was sent."
+						},
+						{
+							"key": "X-Amz-Cf-Id",
+							"value": "vzsAIGtjTGPsMCj0KG6NvK-NuOaEnVNJVzqVQrvs0VpFFuRymnmiRQ==",
+							"name": "X-Amz-Cf-Id",
+							"description": "Custom header"
+						},
+						{
+							"key": "X-Cache",
+							"value": "Miss from cloudfront",
+							"name": "X-Cache",
+							"description": "Custom header"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "Fat-Free Framework",
+							"name": "X-Powered-By",
+							"description": "Specifies the technology (ASP.NET, PHP, JBoss, e.g.) supporting the web application (version details are often in X-Runtime, X-Version, or X-AspNet-Version)"
+						}
+					],
+					"cookie": [
+						{
+							"expires": "Invalid Date",
+							"httpOnly": true,
+							"domain": "coindesk.com",
+							"path": "/",
+							"secure": false,
+							"value": "d92791e337b060b1109d3d2e150caa80b1514320030",
+							"key": "__cfduid"
+						}
+					],
+					"body": "{\"time\":{\"updated\":\"Mar 13, 2018 20:57:00 UTC\",\"updatedISO\":\"2018-03-13T20:57:00+00:00\",\"updateduk\":\"Mar 13, 2018 at 20:57 GMT\"},\"disclaimer\":\"This data was produced from the CoinDesk Bitcoin Price Index (USD). Non-USD currency data converted using hourly conversion rate from openexchangerates.org\",\"chartName\":\"Bitcoin\",\"bpi\":{\"USD\":{\"code\":\"USD\",\"symbol\":\"&#36;\",\"rate\":\"9,070.8125\",\"description\":\"United States Dollar\",\"rate_float\":9070.8125},\"GBP\":{\"code\":\"GBP\",\"symbol\":\"&pound;\",\"rate\":\"6,498.3936\",\"description\":\"British Pound Sterling\",\"rate_float\":6498.3936},\"EUR\":{\"code\":\"EUR\",\"symbol\":\"&euro;\",\"rate\":\"7,323.7649\",\"description\":\"Euro\",\"rate_float\":7323.7649}}}"
+				}
+			]
+		},
+		{
+			"name": "SMS via Twilio",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "d987fde6-390f-410f-9c58-df7db9854365",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "09722d57-5798-4a0e-9aa8-da33637ad734",
+						"exec": [
+							"pm.test(\"Status code is 201\", function () {",
+							"    pm.response.to.have.status(201);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "{{twilioAuthToken}}",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "{{twilioAccountSID}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "",
+						"value": "",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "Body",
+							"value": "Bitcoin is at {{rate}} as of {{time}}.",
+							"type": "text"
+						},
+						{
+							"key": "To",
+							"value": "+19199248485",
+							"description": "Using a [test phone number](https://www.twilio.com/docs/api/rest/test-credentials)",
+							"type": "text"
+						},
+						{
+							"key": "From",
+							"value": "+19199248485",
+							"description": "Using a [test phone number](https://www.twilio.com/docs/api/rest/test-credentials)",
+							"type": "text"
+						},
+						{
+							"key": "",
+							"value": "",
+							"type": "text",
+							"disabled": true
+						}
+					]
+				},
+				"url": {
+					"raw": "https://api.twilio.com/2010-04-01/Accounts/{{twilioAccountSID}}/Messages.json",
+					"protocol": "https",
+					"host": [
+						"api",
+						"twilio",
+						"com"
+					],
+					"path": [
+						"2010-04-01",
+						"Accounts",
+						"{{twilioAccountSID}}",
+						"Messages.json"
+					]
+				},
+				"description": "Using [Twilio test credentials](https://www.twilio.com/docs/api/rest/test-credentials) to run this `POST` request to send an SMS.\n\nRead more about the [Twilio Messaging API](https://www.twilio.com/docs/api/messaging)."
+			},
+			"response": [
+				{
+					"name": "Successful SMS to Twilio",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "",
+								"value": "",
+								"warning": "",
+								"disabled": true
+							},
+							{
+								"key": "",
+								"value": "",
+								"warning": "",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "Body",
+									"value": "Bitcoin is at {{rate}} as of {{time}}.",
+									"type": "text"
+								},
+								{
+									"key": "To",
+									"value": "+15005550006",
+									"type": "text"
+								},
+								{
+									"key": "From",
+									"value": "+15005550006",
+									"type": "text"
+								},
+								{
+									"key": "",
+									"value": "",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "https://api.twilio.com/2010-04-01/Accounts/{{twilioAccountSID}}/Messages.json",
+							"protocol": "https",
+							"host": [
+								"api",
+								"twilio",
+								"com"
+							],
+							"path": [
+								"2010-04-01",
+								"Accounts",
+								"{{twilioAccountSID}}",
+								"Messages.json"
+							]
+						}
+					},
+					"status": "CREATED",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Access-Control-Allow-Credentials",
+							"value": "true",
+							"name": "Access-Control-Allow-Credentials",
+							"description": "Indicates whether or not the response to the request can be exposed when the credentials flag is true. When used as part of a response to a preflight request, this indicates whether or not the actual request can be made using credentials."
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "Accept, Authorization, Content-Type, If-Match, If-Modified-Since, If-None-Match, If-Unmodified-Since",
+							"name": "Access-Control-Allow-Headers",
+							"description": "Used in response to a preflight request to indicate which HTTP headers can be used when making the actual request."
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "GET, POST, DELETE, OPTIONS",
+							"name": "Access-Control-Allow-Methods",
+							"description": "Specifies the method or methods allowed when accessing the resource. This is used in response to a preflight request."
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*",
+							"name": "Access-Control-Allow-Origin",
+							"description": "Specifies a URI that may access the resource. For requests without credentials, the server may specify '*' as a wildcard, thereby allowing any origin to access the resource."
+						},
+						{
+							"key": "Access-Control-Expose-Headers",
+							"value": "ETag",
+							"name": "Access-Control-Expose-Headers",
+							"description": "Lets a server whitelist headers that browsers are allowed to access."
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive",
+							"name": "Connection",
+							"description": "Options that are desired for the connection"
+						},
+						{
+							"key": "Content-Length",
+							"value": "859",
+							"name": "Content-Length",
+							"description": "The length of the response body in octets (8-bit bytes)"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"name": "Content-Type",
+							"description": "The mime type of this content"
+						},
+						{
+							"key": "Date",
+							"value": "Tue, 13 Mar 2018 20:57:01 GMT",
+							"name": "Date",
+							"description": "The date and time that the message was sent"
+						},
+						{
+							"key": "Strict-Transport-Security",
+							"value": "max-age=15768000",
+							"name": "Strict-Transport-Security",
+							"description": "A HSTS Policy informing the HTTP client how long to cache the HTTPS only policy and whether this applies to subdomains."
+						},
+						{
+							"key": "Twilio-Concurrent-Requests",
+							"value": "1",
+							"name": "Twilio-Concurrent-Requests",
+							"description": "Custom header"
+						},
+						{
+							"key": "Twilio-Request-Duration",
+							"value": "0.085",
+							"name": "Twilio-Request-Duration",
+							"description": "Custom header"
+						},
+						{
+							"key": "Twilio-Request-Id",
+							"value": "RQ5b375f70869248d586014f62b62dd523",
+							"name": "Twilio-Request-Id",
+							"description": "Custom header"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "AT-5000",
+							"name": "X-Powered-By",
+							"description": "Specifies the technology (ASP.NET, PHP, JBoss, e.g.) supporting the web application (version details are often in X-Runtime, X-Version, or X-AspNet-Version)"
+						},
+						{
+							"key": "X-Shenanigans",
+							"value": "none",
+							"name": "X-Shenanigans",
+							"description": "Custom header"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"sid\": \"sid_would_display_here\",\n    \"date_created\": \"Tue, 13 Mar 2018 20:57:01 +0000\",\n    \"date_updated\": \"Tue, 13 Mar 2018 20:57:01 +0000\",\n    \"date_sent\": null,\n    \"account_sid\": \"your_sid_would_display_here\",\n    \"to\": \"+15005550006\",\n    \"from\": \"+15005550006\",\n    \"messaging_service_sid\": null,\n    \"body\": \"Sent from your Twilio trial account - Bitcoin is at 9,104.5225 as of Mar 13, 2018 18:50:00 UTC.\",\n    \"status\": \"queued\",\n    \"num_segments\": \"1\",\n    \"num_media\": \"0\",\n    \"direction\": \"outbound-api\",\n    \"api_version\": \"2010-04-01\",\n    \"price\": null,\n    \"price_unit\": \"USD\",\n    \"error_code\": null,\n    \"error_message\": null,\n    \"uri\": \"/2010-04-01/Accounts/your_sid_would_display_here/Messages/sid_would_display_here.json\",\n    \"subresource_uris\": {\n        \"media\": \"/2010-04-01/Accounts/your_sid_would_display_here/Messages/sid_would_display_here/Media.json\"\n    }\n}"
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "656737ea-5d43-4ed1-ade2-fd07886e057a",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "64c32061-4be8-4cb0-a025-4000f145579f",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"protocolProfileBehavior": {}
+}

@@ -1,0 +1,610 @@
+{
+	"info": {
+		"_postman_id": "43835023-1a50-4016-a72f-326eb931a6cb",
+		"name": "Personalized COVID Tracking",
+		"description": "(This is a companion collection to the \"Personlized COVID-19 Alerts blog post published here.) https://blog.postman.com/personalized-covid-19-alert-system/\n\nIf you're looking to set up your own personalized COVID-19 alerts, you've come to the right place. This collection allows you to define measures and benchmarks to monitor relevant statistics. \n\nTo get started, you'll want to edit the following fields in the attached environment:\n* `county_code` : This is the three-digit FIPS code of the county you're monitoring. You can find your county on [this list](https://www.census.gov/prod/techdoc/cbp/cbp95/st-cnty.pdf)\n* `state_code`: This is the two-digit FIPS code of that state you're monitoring. You can find your state on [this list](https://www.census.gov/prod/techdoc/cbp/cbp95/st-cnty.pdf) \n* `per_capita_threshold`: This is the threshold of how many positive tests per 100k people. I set my benchmark at four positive cases per 100k people per day. For some context, data.sfgov.org has a warning system monitoring the average number of new positive cases per day per 100,000 residents, with a goal of reaching 1.8 per 100,000 per day\n* `positivity_rate_threshold`: This is the threshold for the positivity rate we would like to be notified about. I set my benchmark at 5, representing 5% - the WHO recommends states strive for 3-12% positivity, with 5% indicating that the pandemic is under control. \n\n\n### Resources:\nHere are some links that may be helpful in understanding the data and APIs used in this collection:\n- Rich Data Services API. This API allows you to query data and metadata and has a variety of filtering/subsetting/tabulation tools built in. View the [full documentation](https://documenter.getpostman.com/view/2220438/SzS5umZ3?version=latest), or visit the [COVID-19 data center](https://covid19.richdataservices.com/utm_source=postman&utm_medium=blog&utm_campaign=covid) to learn more about the project.\n- Census API. This API allows you to query any of the many data products provided by the Census Bureau. Visit the developer guide [here](https://www.census.gov/content/dam/Census/data/developers/api-user-guide/api-guide.pdf).\n- COVID Tracking Project - This volunteer organization collects data around COVID-19 testing and outcomes for all 50 states. Here, we are querying it through the Rich Data Services API, but [their website](https://covidtracking.com/data) has lots of great COVID releated information.\n- Johns Hopkins University COVID-19 data. JHU collects data on the international level, all the way down to the county level. For this collection, we are accessing it through the Rich Data Services API, but they host the data they collect on their [GitHub repository](https://github.com/CSSEGISandData/COVID-19).",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get county population",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "1bc1ab9a-8042-4ec2-bde3-df62649c22f7",
+						"exec": [
+							"var response = pm.response.json();",
+							"var population = response[1][1]",
+							"console.log(\"-- population : \" + population);",
+							"pm.environment.set(\"county_population\", population);",
+							"",
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"postman.setNextRequest(\"Positive Tests\");"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "4f6a5fc5-00fb-4076-8cd9-912a61f06fe8",
+						"exec": [
+							"console.log(\"Dummy Postman Pre-request Script\");\r",
+							"\r",
+							"console.log(pm.collectionVariables.get(\"state_code\"));"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.census.gov/data/2019/pep/population?get=NAME,POP&for=county:{{county_code}}&in=state:{{state_code}}",
+					"protocol": "https",
+					"host": [
+						"api",
+						"census",
+						"gov"
+					],
+					"path": [
+						"data",
+						"2019",
+						"pep",
+						"population"
+					],
+					"query": [
+						{
+							"key": "get",
+							"value": "NAME,POP",
+							"description": "We are requesting data fo the variables `NAME` (the name of the specified geography) and `POP`, (the population value for the geography)"
+						},
+						{
+							"key": "for",
+							"value": "county:{{county_code}}",
+							"description": "Narrow down the county data to just the county of interest"
+						},
+						{
+							"key": "in",
+							"value": "state:{{state_code}}",
+							"description": "Narrow down the state data to just the state of interest"
+						}
+					]
+				},
+				"description": "Using the Census API, we are querying the 2019 population data to get the population for our county, using the `county_code` and `state_code` variables defined in the environment. \n\nIf you're interested in learning more about the Census API, you can find the developer guide [here](https://www.census.gov/content/dam/Census/data/developers/api-user-guide/api-guide.pdf)."
+			},
+			"response": [
+				{
+					"name": "Get county population",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://api.census.gov/data/2019/pep/population?get=NAME,POP&for=county:{{county_code}}&in=state:{{state_code}}",
+							"protocol": "https",
+							"host": [
+								"api",
+								"census",
+								"gov"
+							],
+							"path": [
+								"data",
+								"2019",
+								"pep",
+								"population"
+							],
+							"query": [
+								{
+									"key": "get",
+									"value": "NAME,POP",
+									"description": "We are requesting data fo the variables `NAME` (the name of the specified geography) and `POP`, (the population value for the geography)"
+								},
+								{
+									"key": "for",
+									"value": "county:{{county_code}}",
+									"description": "Narrow down the county data to just the county of interest"
+								},
+								{
+									"key": "in",
+									"value": "state:{{state_code}}",
+									"description": "Narrow down the state data to just the state of interest"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "Apache-Coyote/1.1"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "max-age=60, must-revalidate"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "GET,POST"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "Origin, X-Requested-With, Content-Type, Accept"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json;charset=utf-8"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 24 Sep 2020 14:29:32 GMT"
+						},
+						{
+							"key": "Strict-Transport-Security",
+							"value": "max-age=31536000"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    [\n        \"NAME\",\n        \"POP\",\n        \"state\",\n        \"county\"\n    ],\n    [\n        \"San Francisco County, California\",\n        \"881549\",\n        \"06\",\n        \"075\"\n    ]\n]"
+				}
+			]
+		},
+		{
+			"name": "Positive Tests",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "ed458a19-8e6b-4971-baaa-fd2ca18089dd",
+						"exec": [
+							"// see if we can print out the total",
+							"console.log(\"Total = \" + pm.response.json().totals);",
+							"",
+							"//Set the record data as a variable ",
+							"var records = pm.response.json().records;",
+							"// DEBUG:",
+							"console.log(\"latest count: \" + records[0][0]);",
+							"",
+							"//calculate the difference in cases from yesterday (records[0]) to 7 days ago (records[6]), using the first value in each array, corresponding to our cnt_confirmed variable. Then do the same for the next seven days.",
+							"var thisWeekDiff = records[0][0] - records[6][0];",
+							"console.log(\"thisWeekDiff : \" + thisWeekDiff );",
+							"var lastWeekDiff = records[7][0] - records[13][0];",
+							"console.log(\"lastWeekDiff : \" + lastWeekDiff);",
+							"",
+							"pm.test(\"There were fewer positive tests this week than there were last week\", function () {",
+							"    pm.expect(thisWeekDiff).to.be.below(lastWeekDiff);",
+							"});",
+							"",
+							"pm.test( \"This should be less positive tests this week that that of last week\", function() {",
+							"    pm.expect(thisWeekDiff).to.be.lessThan(lastWeekDiff);",
+							"});",
+							"",
+							"//calculate the weekly cases per capita and compare it against our threshold.",
+							"var per_capita_threshold = JSON.parse(pm.environment.get(\"per_capita_threshold\"));",
+							"var county_population =JSON.parse(pm.environment.get(\"county_population\"));",
+							"var percapita = ((thisWeekDiff / 7) / county_population) * 100000 ;",
+							"var countyName = records[0][2];",
+							"",
+							"pm.test(\"This week's average daily cases per capita for \" + countyName + \" are less than \" + per_capita_threshold, function () {",
+							"    pm.expect(percapita).to.be.below(per_capita_threshold)",
+							"});",
+							"",
+							"// let's set the next call here",
+							"postman.setNextRequest(\"Positivity Rate\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://covid19.richdataservices.com/rds/api/query/us/jhu_county/select?cols=cnt_confirmed,date_stamp,us_county_fips&where=us_county_fips={{state_code}}{{county_code}}&orderBy=date_stamp DESC&limit=14&inject=true",
+					"protocol": "https",
+					"host": [
+						"covid19",
+						"richdataservices",
+						"com"
+					],
+					"path": [
+						"rds",
+						"api",
+						"query",
+						"us",
+						"jhu_county",
+						"select"
+					],
+					"query": [
+						{
+							"key": "cols",
+							"value": "cnt_confirmed,date_stamp,us_county_fips",
+							"description": "This will return the variables `cnt_confirmed` (cumulative count of confirmed cases) and `date_stamp`, the date the cases were logged."
+						},
+						{
+							"key": "where",
+							"value": "us_county_fips={{state_code}}{{county_code}}",
+							"description": "We are only interested in cases from San Francisco county, which is represented by the county fips code `06075`"
+						},
+						{
+							"key": "orderBy",
+							"value": "date_stamp DESC",
+							"description": "Order by most recent date, descending"
+						},
+						{
+							"key": "limit",
+							"value": "14",
+							"description": "Limit the results to the last 14 days"
+						},
+						{
+							"key": "inject",
+							"value": "true",
+							"description": "Injects the code label instead of the value (`San Francisco County, California` instead of `06075`)"
+						}
+					]
+				},
+				"description": "To calculate the number of positive tests, we're using the Johns Hopkins county-level data, queried over the Rich Data Services API. I returned the cumulative count of confirmed cases (`cnt_confirmed`) and limited my results to the last fourteen days. I combined the `state_code` and `county_code` variables we defined earlier to get the five-digit county FIPS code."
+			},
+			"response": [
+				{
+					"name": "Positive Tests",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://covid19.richdataservices.com/rds/api/query/us/jhu_county/select?cols=cnt_confirmed,date_stamp,us_county_fips&where=us_county_fips={{state_code}}{{county_code}}&orderBy=date_stamp DESC&limit=14&inject=true",
+							"protocol": "https",
+							"host": [
+								"covid19",
+								"richdataservices",
+								"com"
+							],
+							"path": [
+								"rds",
+								"api",
+								"query",
+								"us",
+								"jhu_county",
+								"select"
+							],
+							"query": [
+								{
+									"key": "cols",
+									"value": "cnt_confirmed,date_stamp,us_county_fips",
+									"description": "This will return the variables `cnt_confirmed` (cumulative count of confirmed cases) and `date_stamp`, the date the cases were logged."
+								},
+								{
+									"key": "where",
+									"value": "us_county_fips={{state_code}}{{county_code}}",
+									"description": "We are only interested in cases from San Francisco county, which is represented by the county fips code `06075`"
+								},
+								{
+									"key": "orderBy",
+									"value": "date_stamp DESC",
+									"description": "Order by most recent date, descending"
+								},
+								{
+									"key": "limit",
+									"value": "14",
+									"description": "Limit the results to the last 14 days"
+								},
+								{
+									"key": "inject",
+									"value": "true",
+									"description": "Injects the code label instead of the value (`San Francisco County, California` instead of `06075`)"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Thu, 24 Sep 2020 14:30:05 GMT"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, no-store, max-age=0, must-revalidate"
+						},
+						{
+							"key": "Pragma",
+							"value": "no-cache"
+						},
+						{
+							"key": "Expires",
+							"value": "0"
+						},
+						{
+							"key": "X-XSS-Protection",
+							"value": "1; mode=block"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "DENY"
+						},
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json;charset=UTF-8"
+						},
+						{
+							"key": "Connection",
+							"value": "close"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"info\": {\n        \"cached\": false,\n        \"columnCount\": 3,\n        \"columnOffset\": 0,\n        \"end\": \"2020-09-24T14:30:05.861Z\",\n        \"includeMetadata\": false,\n        \"moreColumns\": false,\n        \"moreRows\": true,\n        \"notes\": [],\n        \"postQueryTime\": 0,\n        \"preQueryTime\": 151,\n        \"queryTime\": 53,\n        \"rowLimit\": 14,\n        \"rowOffset\": 0,\n        \"start\": \"2020-09-24T14:30:05.657Z\",\n        \"totalProcessingTime\": 204\n    },\n    \"records\": [\n        [\n            10901,\n            \"2020-09-23\",\n            \"San Francisco County, CA\"\n        ],\n        [\n            10865,\n            \"2020-09-22\",\n            \"San Francisco County, CA\"\n        ],\n        [\n            10807,\n            \"2020-09-21\",\n            \"San Francisco County, CA\"\n        ],\n        [\n            10745,\n            \"2020-09-20\",\n            \"San Francisco County, CA\"\n        ],\n        [\n            10696,\n            \"2020-09-19\",\n            \"San Francisco County, CA\"\n        ],\n        [\n            10640,\n            \"2020-09-18\",\n            \"San Francisco County, CA\"\n        ],\n        [\n            10569,\n            \"2020-09-17\",\n            \"San Francisco County, CA\"\n        ],\n        [\n            10490,\n            \"2020-09-16\",\n            \"San Francisco County, CA\"\n        ],\n        [\n            10430,\n            \"2020-09-15\",\n            \"San Francisco County, CA\"\n        ],\n        [\n            10378,\n            \"2020-09-14\",\n            \"San Francisco County, CA\"\n        ],\n        [\n            10302,\n            \"2020-09-13\",\n            \"San Francisco County, CA\"\n        ],\n        [\n            10263,\n            \"2020-09-12\",\n            \"San Francisco County, CA\"\n        ],\n        [\n            10188,\n            \"2020-09-11\",\n            \"San Francisco County, CA\"\n        ],\n        [\n            10120,\n            \"2020-09-10\",\n            \"San Francisco County, CA\"\n        ]\n    ],\n    \"totals\": []\n}"
+				}
+			]
+		},
+		{
+			"name": "Positivity Rate",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "e6d35903-97e9-43e8-893b-28a4b4446683",
+						"exec": [
+							"//we are only interested in the record data returned",
+							"var records = pm.response.json().records;",
+							"var state = records[0][1]",
+							"var yesterdayPositivity = records[0][4];",
+							"var positivity_threshold = JSON.parse(pm.environment.get(\"positivity_rate_threshold\"))",
+							"",
+							"pm.test(\"Positivity rate for \"+ state + \" yesterday was below \" + positivity_threshold + \"%.\", function () {",
+							"    pm.expect(yesterdayPositivity).to.be.below(positivity_threshold)",
+							"});",
+							"",
+							"//calculate a weekly positivity rate by summing all of the new positive tests and total new tests",
+							"var newPositive = 0;",
+							"var newTests = 0;",
+							"for(r of records){",
+							"    newPositive+=r[2]",
+							"    newTests+=r[3]",
+							"}",
+							"",
+							"var weeklyPositivity = (newPositive / newTests) * 100",
+							"pm.test(\"Positivity rate for \"+ state + \" in the past 7 days was below \" + positivity_threshold + \"%.\", function () {",
+							"    pm.expect(weeklyPositivity).to.be.below(positivity_threshold)",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "a5b13677-a987-47a9-ac55-e6e76a04e4b7",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://covid19.richdataservices.com/rds/api/query/us/covidtracking_state/select?orderby=date_stamp DESC&cols=date_stamp,us_state_fips,cnt_tested_pos_new,cnt_tested_new,positivity_rate:(cast(cnt_tested_pos_new as decimal)/cast(cnt_tested_new as decimal)*100)&where=cnt_tested_new != 0 AND us_state_fips={{state_code}}&limit=7&metadata=true&inject=true",
+					"protocol": "https",
+					"host": [
+						"covid19",
+						"richdataservices",
+						"com"
+					],
+					"path": [
+						"rds",
+						"api",
+						"query",
+						"us",
+						"covidtracking_state",
+						"select"
+					],
+					"query": [
+						{
+							"key": "orderby",
+							"value": "date_stamp DESC",
+							"description": "order the records by descending date order (most recent will be records[0], etc)"
+						},
+						{
+							"key": "cols",
+							"value": "date_stamp,us_state_fips,cnt_tested_pos_new,cnt_tested_new,positivity_rate:(cast(cnt_tested_pos_new as decimal)/cast(cnt_tested_new as decimal)*100)",
+							"description": "this will return the follwoing variable values in this order: `date_stamp`, `cnt_tested_pos_new`, `cnt_tested_new`, and a calculated positivity rate  variable."
+						},
+						{
+							"key": "where",
+							"value": "cnt_tested_new != 0 AND us_state_fips={{state_code}}",
+							"description": "apply any filters: in this case, we want to make sure `cnt_tested_new` is not zero, as we are using it as the denominator in our calculated positivity rate variable. We will also limit records to California only (06 is the state code)."
+						},
+						{
+							"key": "limit",
+							"value": "7",
+							"description": "Limit records to the last seven days"
+						},
+						{
+							"key": "metadata",
+							"value": "true",
+							"description": "This will return metadata about each variable "
+						},
+						{
+							"key": "inject",
+							"value": "true",
+							"description": "Injects the code label instead of the value (`San Francisco County, California` instead of `06075`)"
+						}
+					]
+				},
+				"description": "Here, we are calculating the positivity rate for our state using the COVID Tracking Project data queried over the Rich Data Services API.\n\nUsing the cols parameter, we are querying the date (`date_stamp`), state (`us_state_fips`), number of new positive tests (`cnt_tested_pos_new`), number of new tests (`cnt_tested_new`), and a calucated variable called `positivity_rate`. Additionally, in this request: \n- We are limiting our results to just our state of interest using the `where` parameter  \n- only taking the last seven days of data using the `limit` parameter \n- ordering by most recent data first using the `orderby` parameter  \n- substituting code values for their labels using the `inject` parameter\n- returning the variable metadata to give us more context using the `metadata` parameter.\n\nFor more information about the RDS API, you can find the full documentation [here]()."
+			},
+			"response": [
+				{
+					"name": "Positivity Rate",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://covid19.richdataservices.com/rds/api/query/us/covidtracking_state/select?orderby=date_stamp DESC&cols=date_stamp,us_state_fips,cnt_tested_pos_new,cnt_tested_new,positivity_rate:(cast(cnt_tested_pos_new as decimal)/cast(cnt_tested_new as decimal)*100)&where=cnt_tested_new != 0 AND us_state_fips={{state_code}}&limit=7&metadata=true&inject=true",
+							"protocol": "https",
+							"host": [
+								"covid19",
+								"richdataservices",
+								"com"
+							],
+							"path": [
+								"rds",
+								"api",
+								"query",
+								"us",
+								"covidtracking_state",
+								"select"
+							],
+							"query": [
+								{
+									"key": "orderby",
+									"value": "date_stamp DESC",
+									"description": "order the records by descending date order (most recent will be records[0], etc)"
+								},
+								{
+									"key": "cols",
+									"value": "date_stamp,us_state_fips,cnt_tested_pos_new,cnt_tested_new,positivity_rate:(cast(cnt_tested_pos_new as decimal)/cast(cnt_tested_new as decimal)*100)",
+									"description": "this will return the follwoing variable values in this order: `date_stamp`, `cnt_tested_pos_new`, `cnt_tested_new`, and a calculated positivity rate  variable."
+								},
+								{
+									"key": "where",
+									"value": "cnt_tested_new != 0 AND us_state_fips={{state_code}}",
+									"description": "apply any filters: in this case, we want to make sure cnt_tested_new is not zero, as we are using it as the denominator in our calculated positivity rate variable. We will also limit records to California only (06 is the state code)."
+								},
+								{
+									"key": "limit",
+									"value": "7",
+									"description": "Limit records to the last seven days"
+								},
+								{
+									"key": "metadata",
+									"value": "true",
+									"description": "This will return metadata about each variable "
+								},
+								{
+									"key": "inject",
+									"value": "true",
+									"description": "Injects the code label instead of the value (`San Francisco County, California` instead of `06075`)"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Thu, 24 Sep 2020 14:30:21 GMT"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, no-store, max-age=0, must-revalidate"
+						},
+						{
+							"key": "Pragma",
+							"value": "no-cache"
+						},
+						{
+							"key": "Expires",
+							"value": "0"
+						},
+						{
+							"key": "X-XSS-Protection",
+							"value": "1; mode=block"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "DENY"
+						},
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json;charset=UTF-8"
+						},
+						{
+							"key": "Connection",
+							"value": "close"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"info\": {\n        \"cached\": false,\n        \"columnCount\": 5,\n        \"columnOffset\": 0,\n        \"end\": \"2020-09-24T14:30:21.194Z\",\n        \"includeMetadata\": true,\n        \"moreColumns\": false,\n        \"moreRows\": true,\n        \"notes\": [],\n        \"postQueryTime\": 0,\n        \"preQueryTime\": 98,\n        \"queryTime\": 379,\n        \"rowLimit\": 7,\n        \"rowOffset\": 0,\n        \"start\": \"2020-09-24T14:30:20.717Z\",\n        \"totalProcessingTime\": 477\n    },\n    \"records\": [\n        [\n            \"2020-09-23\",\n            \"California\",\n            3146,\n            75368,\n            4.1\n        ],\n        [\n            \"2020-09-22\",\n            \"California\",\n            2630,\n            131273,\n            2\n        ],\n        [\n            \"2020-09-21\",\n            \"California\",\n            3294,\n            149624,\n            2.2\n        ],\n        [\n            \"2020-09-20\",\n            \"California\",\n            4265,\n            179272,\n            2.3\n        ],\n        [\n            \"2020-09-19\",\n            \"California\",\n            4304,\n            166700,\n            2.5\n        ],\n        [\n            \"2020-09-18\",\n            \"California\",\n            3630,\n            97149,\n            3.7\n        ],\n        [\n            \"2020-09-17\",\n            \"California\",\n            3238,\n            79515,\n            4\n        ]\n    ],\n    \"totals\": [],\n    \"variables\": [\n        {\n            \"dataType\": \"DATE\",\n            \"description\": \"The date this records counts were collected.\",\n            \"fixedStorageWidth\": 0,\n            \"format\": \"YYYY-MM-DD (<a href=\\\"https://en.wikipedia.org/wiki/ISO_8601\\\">ISO 8601</a>)\",\n            \"id\": \"date_stamp\",\n            \"index\": 2,\n            \"isDimension\": true,\n            \"isMeasure\": false,\n            \"label\": \"Record Date\",\n            \"name\": \"date_stamp\",\n            \"reference\": false,\n            \"revisionNumber\": 0,\n            \"storageType\": \"DATE\",\n            \"uri\": \"6ef5a477-366d-40d2-888f-9d671f7489a1\"\n        },\n        {\n            \"classificationUri\": \"95a51984-8e6e-4deb-9b11-f424c2d188dd\",\n            \"dataType\": \"TEXT\",\n            \"description\": \"The <a href=\\\"https://en.wikipedia.org/wiki/Federal_Information_Processing_Standard_state_code\\\"  target=\\\"_blank\\\">U.S. FIPS 5-2 code</a> of the state this record represents.\",\n            \"fixedStorageWidth\": 2,\n            \"format\": \"\",\n            \"id\": \"us_state_fips\",\n            \"index\": 5,\n            \"isDimension\": true,\n            \"isMeasure\": false,\n            \"label\": \"U.S. State FIPS Code\",\n            \"name\": \"us_state_fips\",\n            \"reference\": false,\n            \"revisionNumber\": 0,\n            \"storageType\": \"VARCHAR\",\n            \"uri\": \"6c16e9d0-1634-4163-9bab-cc88abe5b987\"\n        },\n        {\n            \"dataType\": \"NUMERIC\",\n            \"decimals\": 0,\n            \"description\": \"Increase in positive test results (cnt_tested_pos) from the day before.\",\n            \"fixedStorageWidth\": 32,\n            \"format\": \"\",\n            \"id\": \"cnt_tested_pos_new\",\n            \"index\": 7,\n            \"isMeasure\": true,\n            \"label\": \"Daily Positive Increase\",\n            \"name\": \"cnt_tested_pos_new\",\n            \"reference\": false,\n            \"revisionNumber\": 0,\n            \"storageType\": \"INT\",\n            \"uri\": \"b4300f5a-9749-4ca2-a1ff-7515dc994553\"\n        },\n        {\n            \"dataType\": \"NUMERIC\",\n            \"decimals\": 0,\n            \"description\": \"Increase in number of total test results (cnt_tested) from the day before.\",\n            \"fixedStorageWidth\": 32,\n            \"format\": \"\",\n            \"id\": \"cnt_tested_new\",\n            \"index\": 22,\n            \"isMeasure\": true,\n            \"label\": \"Daily Tested Increase\",\n            \"name\": \"cnt_tested_new\",\n            \"reference\": false,\n            \"revisionNumber\": 0,\n            \"storageType\": \"INT\",\n            \"uri\": \"b3b9f9b0-9cc6-412c-acfc-6794dd5445cc\"\n        },\n        {\n            \"dataType\": \"BIG_DECIMAL\",\n            \"fixedStorageWidth\": 30,\n            \"id\": \"positivity_rate\",\n            \"name\": \"positivity_rate\",\n            \"reference\": false,\n            \"revisionNumber\": 0,\n            \"storageType\": \"DECIMAL\"\n        }\n    ]\n}"
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "e4938084-dbf0-49de-b206-ca986998bd5a",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "131cf130-0982-4c34-974e-0e35d43cde3a",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"id": "21024156-1fa6-4c40-93e7-1de7e84d6b0b",
+			"key": "population",
+			"value": ""
+		},
+		{
+			"id": "db7e0f97-a18b-4724-91f5-c35f1c0bdc7a",
+			"key": "state_population",
+			"value": ""
+		},
+		{
+			"id": "e2a17996-1543-487a-af4f-8d9cf623627c",
+			"key": "county_population",
+			"value": ""
+		}
+	],
+	"protocolProfileBehavior": {}
+}

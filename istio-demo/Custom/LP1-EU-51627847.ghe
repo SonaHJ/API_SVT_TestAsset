@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<editableResource createdTimestamp="1588110215969"
+    createdUser="JAMES.THOMSON" id="-676511cf:171c2bec3fc:-7f68"
+    type="environment_resource" updatedTimestamp="1613752355188"
+    updatedUser="root" version="1.0">
+    <loggingConfiguration debug="false" writeStubEventsToDB="false"/>
+    <resourceConfig isOverridingSecretsNamespace="false" overridingSecretsNamespace="">
+        <environmentVariable evdescription="" key="NAMESPACE" value="bookinfo"/>
+        <evbindings>
+            <evbinding evLogicalItemId="-3c7187cf:177bafd332e:-7bf8" evPhysicalItemId="-3c7187cf:177bafd332e:-7bf7"/>
+            <evbinding evLogicalItemId="-8741b6f:1720d228ea7:-7e13" evPhysicalItemId="-8741b6f:1720d228ea7:-7e12"/>
+        </evbindings>
+    </resourceConfig>
+</editableResource>

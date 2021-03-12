@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<editableResource createdTimestamp="1591103371893"
+    createdUser="JAMES.THOMSON" id="af382be:17274f83bd0:-79b5"
+    selfDescribing="%%HOST%% - http %%HOST%%:9080" type="http_transport"
+    updatedTimestamp="1591878248196" updatedUser="JAMES.THOMSON" version="1.0">
+    <loggingConfiguration debug="false" writeStubEventsToDB="false"/>
+    <resourceConfig transportName="%%HOST%%" transportTemplateName="HTTP">
+        <messageProperties
+            ReasonPhrase="No Stub available that matches the request"
+            clientConnectionsPerHost="100" credDomain=""
+            credPassword="#com.ghc.1!0618" credPreemptive="false"
+            credType="0" credUser="" httpHost="%%HOST%%"
+            httpNtlmDomain="" httpPort="9080" httpProxyHost=""
+            httpProxyPassword="#com.ghc.1!8f2c" httpProxyPort=""
+            httpProxyUsername="" httpServerSocketBindAddressOverride=""
+            httpServerSocketPortOverride="" httpSocketTimeout=""
+            httpTimeoutResponseCode="503" httpVirtualHost=""
+            namespace="" recType="ISTIO_PROXY" useSsl="false" version="4">
+            <kerberos Anon="false" Conf="false" Custom="true"
+                Enabled="false" Integ="false" KDC="" Loc=""
+                MutAuth="false" Principal="" Pwd="#com.ghc.1!33af"
+                Realm="" RepDet="false" SSO="false" SeqCheck="false"/>
+            <oauth clientassertion="" clientid="" clientsecret=""
+                enabled="false" refreshtoken="" scopes="" tokenendpoint=""/>
+            <serverAuthentication>
+                <authenticationConfig enabled="false" realm="" type="1"/>
+                <authenticationConfig algorithm="" authParams=""
+                    domain="" enabled="false" nonce="false" opaque=""
+                    qop="" realm="" stale="" type="2"/>
+                <authenticationConfig enabled="false" type="3"/>
+                <authenticationConfig enabled="false" type="5"/>
+            </serverAuthentication>
+        </messageProperties>
+    </resourceConfig>
+</editableResource>

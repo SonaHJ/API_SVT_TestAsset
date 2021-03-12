@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<editableResource createdTimestamp="1613752327037" createdUser="root"
+    id="-3c7187cf:177bafd332e:-774d"
+    selfDescribing="ProductPageConnection (2) - http localhost"
+    type="http_transport" updatedTimestamp="1613752327037"
+    updatedUser="root" version="1.0">
+    <loggingConfiguration debug="false" writeStubEventsToDB="false"/>
+    <resourceConfig transportName="ProductPageConnection (2)" transportTemplateName="HTTP"/>
+</editableResource>

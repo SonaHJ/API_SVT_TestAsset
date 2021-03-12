@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?><editableResource createdTimestamp="1591964100247" createdUser="JAMES.THOMSON" id="6599c2e9:172a873e586:-7e3b" selfDescribing="Calculator" type="wsdl_schema" updatedTimestamp="1591964100247" updatedUser="JAMES.THOMSON" version="1.0">
+   <loggingConfiguration debug="false" writeStubEventsToDB="false"/>
+   <resourceConfig schemaSourceTemplateName="WSDL">
+      <_c sourceType="101" uri="C:\Users\james.thomson\Documents\Calculator.wsdl"/>
+   </resourceConfig>
+</editableResource>

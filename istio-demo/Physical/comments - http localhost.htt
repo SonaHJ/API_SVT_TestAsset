@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<editableResource createdTimestamp="1590533009973"
+    createdUser="JAMES.THOMSON" id="-4eb5bbbb:172514a11c5:-69ab"
+    selfDescribing="comments - http localhost" type="http_transport"
+    updatedTimestamp="1590533009973" updatedUser="JAMES.THOMSON" version="1.0">
+    <loggingConfiguration debug="false" writeStubEventsToDB="false"/>
+    <resourceConfig transportName="comments" transportTemplateName="HTTP"/>
+</editableResource>

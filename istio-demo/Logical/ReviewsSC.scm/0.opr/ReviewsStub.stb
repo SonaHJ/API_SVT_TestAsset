@@ -1,0 +1,554 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<editableResource createdTimestamp="1613752572848" createdUser="root"
+    id="-3c7187cf:177bafd332e:-76ae" type="stub_resource"
+    updatedTimestamp="1613756791031" updatedUser="root" version="1.1">
+    <loggingConfiguration debug="true" writeStubEventsToDB="true"/>
+    <resourceConfig description="" name="">
+        <testTree>
+            <editableResource id="-3c7187cf:177bafd332e:-76a4"
+                selfDescribing="Configure a subscriber to pick up a message that can be passed to the child Case Actions"
+                type="message_switch_action" version="1.0">
+                <loggingConfiguration debug="false" writeStubEventsToDB="false"/>
+                <resourceConfig description="" formatter="HTTP_Message"
+                    name="on resource &quot;/reviews/0&quot; via &quot;ReviewsConnection&quot;"
+                    src="-3c7187cf:177bafd332e:-76b0" transport="-8741b6f:1720d228ea7:-7e13">
+                    <settings MessageType="http.text.message.type"
+                        Method="GET" URL="/reviews/0" _version="1.1"
+                        allowSubPath="false" consumerType="Participate"
+                        filterHeaders="true" filterMethod="true" filterResourcePath="true">
+                        <filterHeadersList>
+                            <header disabled="true"
+                                name="x-envoy-peer-metadata-id" type="7" value="sidecar~10.42.0.50~productpage-v1-65576bb7bf-ll2tz.bookinfo~bookinfo.svc.cluster.local"/>
+                            <header disabled="true"
+                                name="x-envoy-decorator-operation"
+                                type="7" value="reviews.bookinfo.svc.cluster.local:9080/*"/>
+                            <header disabled="true"
+                                name="x-envoy-peer-metadata" type="7" value="Ch8KDkFQUF9DT05UQUlORVJTEg0aC3Byb2R1Y3RwYWdlChoKCkNMVVNURVJfSUQSDBoKS3ViZXJuZXRlcwoYCg1JU1RJT19WRVJTSU9OEgcaBTEuOC4wCvgBCgZMQUJFTFMS7QEq6gEKFAoDYXBwEg0aC3Byb2R1Y3RwYWdlChkKDGlzdGlvLmlvL3JldhIJGgdkZWZhdWx0CiEKEXBvZC10ZW1wbGF0ZS1oYXNoEgwaCjY1NTc2YmI3YmYKJAoZc2VjdXJpdHkuaXN0aW8uaW8vdGxzTW9kZRIHGgVpc3RpbwowCh9zZXJ2aWNlLmlzdGlvLmlvL2Nhbm9uaWNhbC1uYW1lEg0aC3Byb2R1Y3RwYWdlCisKI3NlcnZpY2UuaXN0aW8uaW8vY2Fub25pY2FsLXJldmlzaW9uEgQaAnYxCg8KB3ZlcnNpb24SBBoCdjEKGgoHTUVTSF9JRBIPGg1jbHVzdGVyLmxvY2FsCikKBE5BTUUSIRofcHJvZHVjdHBhZ2UtdjEtNjU1NzZiYjdiZi1sbDJ0egoXCglOQU1FU1BBQ0USChoIYm9va2luZm8KUwoFT1dORVISShpIa3ViZXJuZXRlczovL2FwaXMvYXBwcy92MS9uYW1lc3BhY2VzL2Jvb2tpbmZvL2RlcGxveW1lbnRzL3Byb2R1Y3RwYWdlLXYxChcKEVBMQVRGT1JNX01FVEFEQVRBEgIqAAohCg1XT1JLTE9BRF9OQU1FEhAaDnByb2R1Y3RwYWdlLXYx"/>
+                        </filterHeadersList>
+                    </settings>
+                    <passThrough behaviour="SIMULATE_ERROR"
+                        componentId="-3c7187cf:177bafd332e:-76b0"
+                        componentType="OPERATION" templateType="http_transport">
+                        <SIMULATE_ERROR delayPeriod="0" errorCode="503" statusText="Unavailable"/>
+                    </passThrough>
+                    <cases>
+                        <editableResource
+                            id="-3c7187cf:177bafd332e:-76a0"
+                            selfDescribing="Configure the filtering and validation for this Case action"
+                            type="message_case_action" version="1.0">
+                            <loggingConfiguration debug="false" writeStubEventsToDB="false"/>
+                            <resourceConfig description="" name="&quot;Text&quot; using schema &quot;Text&quot;">
+                                <FilterExpressions option="NOTHING" type="script:ECMAScript"/>
+                                <bodyfilters assocdefid="Text"
+                                    name="Text" sch="Text" type="12" version="1.2">
+                                    <fieldActionGroup>
+                                    <fieldAction enabled="false" type="1">
+                                    <fieldAction
+                                    anyOrder="false"
+                                    enabled="false"
+                                    ignoreExtra="false"
+                                    ignoreNonPresent="false" type="100"/>
+                                    </fieldAction>
+                                    </fieldActionGroup>
+                                    <filterActionGroup>
+                                    <fieldAction type="1">
+                                    <fieldAction type="10"/>
+                                    </fieldAction>
+                                    </filterActionGroup>
+                                    <_c name="text" sch="Text" type="7"
+                                    value="" version="1.2"/>
+                                </bodyfilters>
+                                <headerfilters
+                                    assocdefid="Http Subscribe"
+                                    meTy="Message" name=""
+                                    sch="Http Subscribe" type="12" version="1.2">
+                                    <fieldActionGroup>
+                                    <fieldAction enabled="false" type="1">
+                                    <fieldAction
+                                    anyOrder="false"
+                                    enabled="false"
+                                    ignoreExtra="false"
+                                    ignoreNonPresent="false" type="100"/>
+                                    </fieldAction>
+                                    </fieldActionGroup>
+                                    <_c meTy="String" name="Method"
+                                    sch="Http Subscribe" type="7" version="1.2">
+                                    <filterActionGroup>
+                                    <fieldAction enabled="false" type="1">
+                                    <fieldAction
+                                    enabled="false"
+                                    exp="GET" type="0"/>
+                                    </fieldAction>
+                                    </filterActionGroup>
+                                    </_c>
+                                    <_c meTy="String" name="URL"
+                                    sch="Http Subscribe" type="7" version="1.2">
+                                    <filterActionGroup>
+                                    <fieldAction enabled="false" type="1">
+                                    <fieldAction
+                                    enabled="false"
+                                    exp="/reviews/0" type="0"/>
+                                    </fieldAction>
+                                    </filterActionGroup>
+                                    </_c>
+                                    <_c meTy="Message"
+                                    name="httpDetails"
+                                    sch="Http Subscribe" type="12" version="1.2">
+                                    <fieldActionGroup>
+                                    <fieldAction enabled="false" type="1">
+                                    <fieldAction
+                                    anyOrder="false"
+                                    enabled="false"
+                                    ignoreExtra="false"
+                                    ignoreNonPresent="false" type="100"/>
+                                    </fieldAction>
+                                    </fieldActionGroup>
+                                    <_c meTy="String" name="Version"
+                                    sch="Http Subscribe"
+                                    type="7" version="1.2"/>
+                                    <_c meTy="Message"
+                                    name="httpHeaders"
+                                    sch="Http Subscribe"
+                                    type="12" version="1.2">
+                                    <fieldActionGroup>
+                                    <fieldAction
+                                    enabled="false" type="1">
+                                    <fieldAction
+                                    anyOrder="false"
+                                    enabled="false"
+                                    ignoreExtra="false"
+                                    ignoreNonPresent="false" type="100"/>
+                                    </fieldAction>
+                                    </fieldActionGroup>
+                                    <_c meTy="String"
+                                    name="x-envoy-peer-metadata-id"
+                                    sch="Http Subscribe"
+                                    type="7" version="1.2">
+                                    <filterActionGroup>
+                                    <fieldAction
+                                    enabled="false" type="1">
+                                    <fieldAction
+                                    enabled="false"
+                                    exp="sidecar~10.42.0.50~productpage-v1-65576bb7bf-ll2tz.bookinfo~bookinfo.svc.cluster.local" type="0"/>
+                                    </fieldAction>
+                                    </filterActionGroup>
+                                    </_c>
+                                    <_c meTy="String"
+                                    name="x-envoy-decorator-operation"
+                                    sch="Http Subscribe"
+                                    type="7" version="1.2">
+                                    <filterActionGroup>
+                                    <fieldAction
+                                    enabled="false" type="1">
+                                    <fieldAction
+                                    enabled="false"
+                                    exp="reviews.bookinfo.svc.cluster.local:9080/*" type="0"/>
+                                    </fieldAction>
+                                    </filterActionGroup>
+                                    </_c>
+                                    <_c meTy="String"
+                                    name="x-envoy-peer-metadata"
+                                    sch="Http Subscribe"
+                                    type="7" version="1.2">
+                                    <filterActionGroup>
+                                    <fieldAction
+                                    enabled="false" type="1">
+                                    <fieldAction
+                                    enabled="false"
+                                    exp="Ch8KDkFQUF9DT05UQUlORVJTEg0aC3Byb2R1Y3RwYWdlChoKCkNMVVNURVJfSUQSDBoKS3ViZXJuZXRlcwoYCg1JU1RJT19WRVJTSU9OEgcaBTEuOC4wCvgBCgZMQUJFTFMS7QEq6gEKFAoDYXBwEg0aC3Byb2R1Y3RwYWdlChkKDGlzdGlvLmlvL3JldhIJGgdkZWZhdWx0CiEKEXBvZC10ZW1wbGF0ZS1oYXNoEgwaCjY1NTc2YmI3YmYKJAoZc2VjdXJpdHkuaXN0aW8uaW8vdGxzTW9kZRIHGgVpc3RpbwowCh9zZXJ2aWNlLmlzdGlvLmlvL2Nhbm9uaWNhbC1uYW1lEg0aC3Byb2R1Y3RwYWdlCisKI3NlcnZpY2UuaXN0aW8uaW8vY2Fub25pY2FsLXJldmlzaW9uEgQaAnYxCg8KB3ZlcnNpb24SBBoCdjEKGgoHTUVTSF9JRBIPGg1jbHVzdGVyLmxvY2FsCikKBE5BTUUSIRofcHJvZHVjdHBhZ2UtdjEtNjU1NzZiYjdiZi1sbDJ0egoXCglOQU1FU1BBQ0USChoIYm9va2luZm8KUwoFT1dORVISShpIa3ViZXJuZXRlczovL2FwaXMvYXBwcy92MS9uYW1lc3BhY2VzL2Jvb2tpbmZvL2RlcGxveW1lbnRzL3Byb2R1Y3RwYWdlLXYxChcKEVBMQVRGT1JNX01FVEFEQVRBEgIqAAohCg1XT1JLTE9BRF9OQU1FEhAaDnByb2R1Y3RwYWdlLXYx" type="0"/>
+                                    </fieldAction>
+                                    </filterActionGroup>
+                                    </_c>
+                                    </_c>
+                                    </_c>
+                                    <_c meTy="String" name="MessageType"
+                                    sch="Http Subscribe" type="7" version="1.2">
+                                    <filterActionGroup>
+                                    <fieldAction enabled="false" type="1">
+                                    <fieldAction
+                                    enabled="false"
+                                    exp="http.text.message.type" type="0"/>
+                                    </fieldAction>
+                                    </filterActionGroup>
+                                    </_c>
+                                    <_c meTy="Date-Time"
+                                    name="rcvdTimestamp"
+                                    sch="Http Subscribe" type="11" version="1.2"/>
+                                </headerfilters>
+                                <childActions>
+                                    <editableResource
+                                    id="-3c7187cf:177bafd332e:-769f"
+                                    selfDescribing="Respond to a previously received request message.  Select the relevant request from the drop-down and edit the content of the message to send."
+                                    type="send_reply_action" version="1.0">
+                                    <loggingConfiguration
+                                    debug="false" writeStubEventsToDB="false"/>
+                                    <resourceConfig description=""
+                                    formatter="HTTP_Message"
+                                    name="&quot;Text&quot; using schema &quot;Text&quot; (2)" receiverequestid="-3c7187cf:177bafd332e:-76a4">
+                                    <replyHeaderMessage
+                                    assocdefid="Http Send Reply"
+                                    meTy="Message" name=""
+                                    sch="Http Send Reply"
+                                    type="12" version="1.2">
+                                    <fieldActionGroup>
+                                    <fieldAction
+                                    enabled="false" type="1">
+                                    <fieldAction
+                                    anyOrder="false"
+                                    enabled="false"
+                                    ignoreExtra="false"
+                                    ignoreNonPresent="false" type="100"/>
+                                    </fieldAction>
+                                    </fieldActionGroup>
+                                    <_c meTy="String"
+                                    name="StatusCode"
+                                    sch="Http Send Reply"
+                                    type="7" value="200" version="1.2">
+                                    <fieldActionGroup>
+                                    <fieldAction type="0">
+                                    <fieldAction
+                                    exp="200" type="0"/>
+                                    </fieldAction>
+                                    <fieldAction
+                                    enabled="false" type="1">
+                                    <fieldAction
+                                    enabled="false"
+                                    exp="200" type="0"/>
+                                    </fieldAction>
+                                    </fieldActionGroup>
+                                    </_c>
+                                    <_c meTy="String"
+                                    name="ReasonPhrase"
+                                    sch="Http Send Reply"
+                                    type="7" value="" version="1.2">
+                                    <fieldActionGroup>
+                                    <fieldAction type="0">
+                                    <fieldAction type="0"/>
+                                    </fieldAction>
+                                    </fieldActionGroup>
+                                    </_c>
+                                    <_c meTy="String"
+                                    name="MessageType"
+                                    sch="Http Send Reply"
+                                    type="7"
+                                    value="http.text.message.type" version="1.2">
+                                    <fieldActionGroup>
+                                    <fieldAction type="0">
+                                    <fieldAction
+                                    exp="http.text.message.type" type="0"/>
+                                    </fieldAction>
+                                    <fieldAction
+                                    enabled="false" type="1">
+                                    <fieldAction
+                                    enabled="false"
+                                    exp="http.text.message.type" type="0"/>
+                                    </fieldAction>
+                                    </fieldActionGroup>
+                                    </_c>
+                                    <_c meTy="Message"
+                                    name="httpDetails"
+                                    sch="Http Send Reply"
+                                    type="12" version="1.2">
+                                    <fieldActionGroup>
+                                    <fieldAction
+                                    enabled="false" type="1">
+                                    <fieldAction
+                                    anyOrder="false"
+                                    enabled="false"
+                                    ignoreExtra="false"
+                                    ignoreNonPresent="false" type="100"/>
+                                    </fieldAction>
+                                    </fieldActionGroup>
+                                    <_c meTy="String"
+                                    name="Version"
+                                    sch="Http Send Reply"
+                                    type="7"
+                                    value="1.0" version="1.2">
+                                    <fieldActionGroup>
+                                    <fieldAction type="0">
+
+                                    <fieldAction
+                                    exp="1.0" type="0"/>
+                                    </fieldAction>
+                                    </fieldActionGroup>
+                                    </_c>
+                                    <_c meTy="Message"
+                                    name="httpHeaders"
+                                    sch="Http Send Reply"
+                                    type="12" version="1.2">
+                                    <fieldActionGroup>
+                                    <fieldAction
+                                    enabled="false" type="1">
+
+                                    <fieldAction
+                                    anyOrder="false"
+                                    enabled="false"
+                                    ignoreExtra="false"
+                                    ignoreNonPresent="false" type="100"/>
+                                    </fieldAction>
+                                    </fieldActionGroup>
+                                    <_c
+                                    meTy="String"
+                                    name="x-powered-by"
+                                    sch="Http Send Reply"
+                                    type="7"
+                                    value="Servlet/3.1" version="1.2">
+                                    <fieldActionGroup>
+
+                                    <fieldAction type="0">
+
+                                    <fieldAction
+                                    exp="Servlet/3.1" type="0"/>
+                                    </fieldAction>
+
+                                    <fieldAction
+                                    enabled="false" type="1">
+
+                                    <fieldAction
+                                    enabled="false"
+                                    exp="Servlet/3.1" type="0"/>
+                                    </fieldAction>
+                                    </fieldActionGroup>
+                                    </_c>
+                                    <_c
+                                    meTy="String"
+                                    name="content-type"
+                                    sch="Http Send Reply"
+                                    type="7"
+                                    value="application/json" version="1.2">
+                                    <fieldActionGroup>
+
+                                    <fieldAction type="0">
+
+                                    <fieldAction
+                                    exp="application/json" type="0"/>
+                                    </fieldAction>
+
+                                    <fieldAction
+                                    enabled="false" type="1">
+
+                                    <fieldAction
+                                    enabled="false"
+                                    exp="application/json" type="0"/>
+                                    </fieldAction>
+                                    </fieldActionGroup>
+                                    </_c>
+                                    <_c
+                                    meTy="String"
+                                    name="content-language"
+                                    sch="Http Send Reply"
+                                    type="7"
+                                    value="en-US" version="1.2">
+                                    <fieldActionGroup>
+
+                                    <fieldAction type="0">
+
+                                    <fieldAction
+                                    exp="en-US" type="0"/>
+                                    </fieldAction>
+
+                                    <fieldAction
+                                    enabled="false" type="1">
+
+                                    <fieldAction
+                                    enabled="false"
+                                    exp="en-US" type="0"/>
+                                    </fieldAction>
+                                    </fieldActionGroup>
+                                    </_c>
+                                    <_c
+                                    meTy="String"
+                                    name="x-envoy-peer-metadata"
+                                    sch="Http Send Reply"
+                                    type="7"
+                                    value="ChsKDkFQUF9DT05UQUlORVJTEgkaB3Jldmlld3MKGgoKQ0xVU1RFUl9JRBIMGgpLdWJlcm5ldGVzChgKDUlTVElPX1ZFUlNJT04SBxoFMS44LjAK8AEKBkxBQkVMUxLlASriAQoQCgNhcHASCRoHcmV2aWV3cwoZCgxpc3Rpby5pby9yZXYSCRoHZGVmYXVsdAohChFwb2QtdGVtcGxhdGUtaGFzaBIMGgo1ZjdiOWY0Zjc3CiQKGXNlY3VyaXR5LmlzdGlvLmlvL3Rsc01vZGUSBxoFaXN0aW8KLAofc2VydmljZS5pc3Rpby5pby9jYW5vbmljYWwtbmFtZRIJGgdyZXZpZXdzCisKI3NlcnZpY2UuaXN0aW8uaW8vY2Fub25pY2FsLXJldmlzaW9uEgQaAnYzCg8KB3ZlcnNpb24SBBoCdjMKGgoHTUVTSF9JRBIPGg1jbHVzdGVyLmxvY2FsCiUKBE5BTUUSHRobcmV2aWV3cy12My01ZjdiOWY0Zjc3LWZ6NW5rChcKCU5BTUVTUEFDRRIKGghib29raW5mbwpPCgVPV05FUhJGGkRrdWJlcm5ldGVzOi8vYXBpcy9hcHBzL3YxL25hbWVzcGFjZXMvYm9va2luZm8vZGVwbG95bWVudHMvcmV2aWV3cy12MwoXChFQTEFURk9STV9NRVRBREFUQRICKgAKHQoNV09SS0xPQURfTkFNRRIMGgpyZXZpZXdzLXYz" version="1.2">
+                                    <fieldActionGroup>
+
+                                    <fieldAction type="0">
+
+                                    <fieldAction
+                                    exp="ChsKDkFQUF9DT05UQUlORVJTEgkaB3Jldmlld3MKGgoKQ0xVU1RFUl9JRBIMGgpLdWJlcm5ldGVzChgKDUlTVElPX1ZFUlNJT04SBxoFMS44LjAK8AEKBkxBQkVMUxLlASriAQoQCgNhcHASCRoHcmV2aWV3cwoZCgxpc3Rpby5pby9yZXYSCRoHZGVmYXVsdAohChFwb2QtdGVtcGxhdGUtaGFzaBIMGgo1ZjdiOWY0Zjc3CiQKGXNlY3VyaXR5LmlzdGlvLmlvL3Rsc01vZGUSBxoFaXN0aW8KLAofc2VydmljZS5pc3Rpby5pby9jYW5vbmljYWwtbmFtZRIJGgdyZXZpZXdzCisKI3NlcnZpY2UuaXN0aW8uaW8vY2Fub25pY2FsLXJldmlzaW9uEgQaAnYzCg8KB3ZlcnNpb24SBBoCdjMKGgoHTUVTSF9JRBIPGg1jbHVzdGVyLmxvY2FsCiUKBE5BTUUSHRobcmV2aWV3cy12My01ZjdiOWY0Zjc3LWZ6NW5rChcKCU5BTUVTUEFDRRIKGghib29raW5mbwpPCgVPV05FUhJGGkRrdWJlcm5ldGVzOi8vYXBpcy9hcHBzL3YxL25hbWVzcGFjZXMvYm9va2luZm8vZGVwbG95bWVudHMvcmV2aWV3cy12MwoXChFQTEFURk9STV9NRVRBREFUQRICKgAKHQoNV09SS0xPQURfTkFNRRIMGgpyZXZpZXdzLXYz" type="0"/>
+                                    </fieldAction>
+
+                                    <fieldAction
+                                    enabled="false" type="1">
+
+                                    <fieldAction
+                                    enabled="false"
+                                    exp="ChsKDkFQUF9DT05UQUlORVJTEgkaB3Jldmlld3MKGgoKQ0xVU1RFUl9JRBIMGgpLdWJlcm5ldGVzChgKDUlTVElPX1ZFUlNJT04SBxoFMS44LjAK8AEKBkxBQkVMUxLlASriAQoQCgNhcHASCRoHcmV2aWV3cwoZCgxpc3Rpby5pby9yZXYSCRoHZGVmYXVsdAohChFwb2QtdGVtcGxhdGUtaGFzaBIMGgo1ZjdiOWY0Zjc3CiQKGXNlY3VyaXR5LmlzdGlvLmlvL3Rsc01vZGUSBxoFaXN0aW8KLAofc2VydmljZS5pc3Rpby5pby9jYW5vbmljYWwtbmFtZRIJGgdyZXZpZXdzCisKI3NlcnZpY2UuaXN0aW8uaW8vY2Fub25pY2FsLXJldmlzaW9uEgQaAnYzCg8KB3ZlcnNpb24SBBoCdjMKGgoHTUVTSF9JRBIPGg1jbHVzdGVyLmxvY2FsCiUKBE5BTUUSHRobcmV2aWV3cy12My01ZjdiOWY0Zjc3LWZ6NW5rChcKCU5BTUVTUEFDRRIKGghib29raW5mbwpPCgVPV05FUhJGGkRrdWJlcm5ldGVzOi8vYXBpcy9hcHBzL3YxL25hbWVzcGFjZXMvYm9va2luZm8vZGVwbG95bWVudHMvcmV2aWV3cy12MwoXChFQTEFURk9STV9NRVRBREFUQRICKgAKHQoNV09SS0xPQURfTkFNRRIMGgpyZXZpZXdzLXYz" type="0"/>
+                                    </fieldAction>
+                                    </fieldActionGroup>
+                                    </_c>
+                                    <_c
+                                    meTy="String"
+                                    name="x-envoy-peer-metadata-id"
+                                    sch="Http Send Reply"
+                                    type="7"
+                                    value="sidecar~10.42.0.48~reviews-v3-5f7b9f4f77-fz5nk.bookinfo~bookinfo.svc.cluster.local" version="1.2">
+                                    <fieldActionGroup>
+
+                                    <fieldAction type="0">
+
+                                    <fieldAction
+                                    exp="sidecar~10.42.0.48~reviews-v3-5f7b9f4f77-fz5nk.bookinfo~bookinfo.svc.cluster.local" type="0"/>
+                                    </fieldAction>
+
+                                    <fieldAction
+                                    enabled="false" type="1">
+
+                                    <fieldAction
+                                    enabled="false"
+                                    exp="sidecar~10.42.0.48~reviews-v3-5f7b9f4f77-fz5nk.bookinfo~bookinfo.svc.cluster.local" type="0"/>
+                                    </fieldAction>
+                                    </fieldActionGroup>
+                                    </_c>
+                                    </_c>
+                                    </_c>
+                                    </replyHeaderMessage>
+                                    <replyMessage
+                                    assocdefid="Text"
+                                    name="Text" sch="Text"
+                                    type="12" version="1.2">
+                                    <fieldActionGroup>
+                                    <fieldAction
+                                    enabled="false" type="1">
+                                    <fieldAction
+                                    anyOrder="false"
+                                    enabled="false"
+                                    ignoreExtra="false"
+                                    ignoreNonPresent="false" type="100"/>
+                                    </fieldAction>
+                                    </fieldActionGroup>
+                                    <_c coreTypeInt="7"
+                                    coreTypeName="String"
+                                    name="text"
+                                    nodeFormatter="JSON.nodeformatter"
+                                    sch="Text" type="12" version="1.2">
+                                    <fieldExpander
+                                    fieldExpanderID="JSON.fieldexpander"
+                                    fieldSchema="JSON" fieldSchemaRoot="Object"/>
+                                    <contentTree>{"id":"0","reviews":[{"reviewer":"Reviewer1","text":"Not much action in this one.","rating":{"stars":2,"color":"blue"}},{"reviewer":"Reviewer2","text":"Not much adventure.","rating":{"stars":2,"color":"yellow"}}]}<defaultActions>
+                                    <defaultMessageActions>
+                                    <fieldActionGroup>
+
+                                    <fieldAction
+                                    enabled="false" type="1">
+
+                                    <fieldAction
+                                    anyOrder="false"
+                                    enabled="false"
+                                    ignoreExtra="false"
+                                    ignoreNonPresent="false" type="100"/>
+                                    </fieldAction>
+
+                                    <fieldAction type="0">
+
+                                    <fieldAction type="100"/>
+                                    </fieldAction>
+
+                                    <fieldAction
+                                    enabled="false" type="1">
+
+                                    <fieldAction
+                                    enabled="false" type="5"/>
+                                    </fieldAction>
+
+                                    <fieldAction
+                                    enabled="false" type="1">
+
+                                    <fieldAction
+                                    enabled="false"
+                                    type="6"
+                                    typeActionAllType="true" typeActionMetaType="false"/>
+                                    </fieldAction>
+                                    </fieldActionGroup>
+                                    </defaultMessageActions>
+                                    <defaultScalarActions>
+                                    <fieldActionGroup>
+
+                                    <fieldAction
+                                    enabled="false" type="1">
+
+                                    <fieldAction
+                                    enabled="false" type="0"/>
+                                    </fieldAction>
+
+                                    <fieldAction type="0">
+
+                                    <fieldAction type="0"/>
+                                    </fieldAction>
+
+                                    <fieldAction
+                                    enabled="false" type="1">
+
+                                    <fieldAction
+                                    enabled="false" type="5"/>
+                                    </fieldAction>
+
+                                    <fieldAction
+                                    enabled="false" type="1">
+
+                                    <fieldAction
+                                    enabled="false"
+                                    type="6"
+                                    typeActionAllType="true" typeActionMetaType="false"/>
+                                    </fieldAction>
+                                    </fieldActionGroup>
+                                    </defaultScalarActions>
+                                    </defaultActions>
+                                    <updates>
+                                    <updateField path="/text/Object">
+                                    <_c assocdefid="Object"/>
+                                    </updateField>
+                                    <updateField path="/text/Object/reviews">
+                                    <_c assocdefid="Array"/>
+                                    </updateField>
+                                    <updateField path="/text/Object/reviews/0">
+                                    <_c name="0"/>
+                                    </updateField>
+                                    <updateField path="/text/Object/reviews/1">
+                                    <_c name="1"/>
+                                    </updateField>
+                                    </updates>
+                                    </contentTree>
+                                    <fieldActionGroup>
+                                    <fieldAction type="0">
+                                    <fieldAction type="4"/>
+                                    </fieldAction>
+                                    <fieldAction
+                                    enabled="false" type="1">
+                                    <fieldAction
+                                    enabled="false" type="7"/>
+                                    </fieldAction>
+                                    </fieldActionGroup>
+                                    </_c>
+                                    </replyMessage>
+                                    </resourceConfig>
+                                    </editableResource>
+                                </childActions>
+                            </resourceConfig>
+                        </editableResource>
+                        <editableResource
+                            id="-3c7187cf:177bafd332e:-76a3"
+                            type="default_case_action" version="1.0">
+                            <loggingConfiguration debug="false" writeStubEventsToDB="false"/>
+                            <resourceConfig description="" name=" (2)"/>
+                        </editableResource>
+                    </cases>
+                </resourceConfig>
+            </editableResource>
+        </testTree>
+        <tagDataStore inputMode="NONE" outputMode="NONE"/>
+        <testprops messageClearance="false"/>
+        <stubprops behaviourStyle="ONE_TO_ONE" majorVersion="1"
+            messageClearance="false" minorVersion="0" optimise="false" wrks="10">
+            <responseTimeTable>
+                <entry key="-3c7187cf:177bafd332e:-76b0">
+                    <value type="NO_DELAY"/>
+                </entry>
+            </responseTimeTable>
+            <environmentTasks preventExecutionOnFailure="false"/>
+        </stubprops>
+        <Session mode="NONE"/>
+    </resourceConfig>
+</editableResource>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<editableResource createdTimestamp="1614012596738"
+    createdUser="RICHARD.LITTLEJR" id="-b689a4e:177ca90867a:-7d4a"
+    selfDescribing="in-stub123.10.134.59.250.nip.io (10.134.59.250)"
+    type="host_machine_resource" updatedTimestamp="1614012596738"
+    updatedUser="RICHARD.LITTLEJR" version="1.0">
+    <loggingConfiguration debug="false" writeStubEventsToDB="false"/>
+    <resourceConfig host_address="10.134.59.250" user_host_name="in-stub123.10.134.59.250.nip.io">
+        <roles>
+            <identity name="ssh" port="22"/>
+        </roles>
+    </resourceConfig>
+</editableResource>

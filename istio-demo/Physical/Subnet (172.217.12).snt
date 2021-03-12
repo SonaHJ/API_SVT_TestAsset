@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<editableResource createdTimestamp="1597345473891"
+    createdUser="ibmadmin" id="-1fe9351a:173e9359643:-7e10"
+    selfDescribing="Subnet (172.217.12)" type="sub_net_resource"
+    updatedTimestamp="1597345473891" updatedUser="ibmadmin" version="1.0">
+    <loggingConfiguration debug="false" writeStubEventsToDB="false"/>
+    <resourceConfig subnet="172.217.12" user_sub_net_name="Subnet"/>
+</editableResource>

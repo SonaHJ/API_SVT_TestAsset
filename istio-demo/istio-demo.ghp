@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<_c certificateAuthority="KEY_1024_BITS" comments=""
+    creationVersion="@MAJ@.@MIN@.@PNT@" domain="default" extDocPrefix=""
+    name="istio-demo" owner="Mike Shupert"
+    rulesCacheUri="%%PROJECT/ROOT%%Rules" uuid="00000171-c2be-c120-0000-05e5213ec0e0">
+    <rootEnvironmentConfig isOverridingSecretsNamespace="false" overridingSecretsNamespace="">
+        <environmentVariable evdescription="" key="HOST" value=""/>
+        <environmentVariable evdescription="" key="NAMESPACE" value="default"/>
+    </rootEnvironmentConfig>
+    <dateTimeConfig date="yyyy/MM/dd" dateTime="dd-MMM-yyyy HH:mm:ss" time="HH:mm:ss.SSS"/>
+    <serverSettings ghRepositoryURL="https://localhost:5443/RTCP"
+        trustSource="INBUILT_CA" trustStorePath="">
+        <dbConnectionParameters maxConnections="5" poolName="DefaultPoolName">
+            <connectionParams ZOSEnv="false"
+                dpsHost="http://&lt;hostname>:&lt;port>/api/v1/profile"
+                dpsPass="#com.ghc.1!fd86" dpsUser="" driverClass=""
+                password="#com.ghc.1!814f" schema="" url="" user="">
+                <dpsSsl useSsl="false"/>
+                <stubSettings maxProcCallCount="10000"
+                    maxResultSetRowCount="10000" maxRowCount="10000"
+                    password="#com.ghc.1!34ee"
+                    procedureLearningBehaviour="1" schema="" url=""
+                    useIntegratedDB="true" useSsl="false" user=""/>
+                <storedProcedureFilter catalogFilterEnabled="false"
+                    catalogFilterPattern=""
+                    procedureFilterEnabled="false"
+                    procedureFilterPattern="" schemaFilterEnabled="true"
+                    schemaFilterPattern=""
+                    storedProceduresRetrievalEnabled="false" useConnectionUsername="true"/>
+                <timestampFormatting timestampFormatZero="false"
+                    timestampFormattingEnabled="false" timestampPrecision="9"/>
+            </connectionParams>
+        </dbConnectionParameters>
+        <automationServer enabled="true" hostname="10.134.150.16.nip.io"
+            port="443" projectId="-1"
+            projectName="--No Project Selected--" publishResults="false"
+            trustSource="TRUST_ALL" trustStorePassword="#com.ghc.1!eb60" trustStorePath=""/>
+    </serverSettings>
+    <permissionsSettings autoLogin="false" host="EU-PNP-DC02"
+        permFactId="ldap.permissions.factory.none" port="389" pswd="g8YvJpUleKzCQqH9Fzpl0sNu1rr1VEg/gZkebiIf35g=$saMzc1UuDinvyy6jqE6gC/+XMi4eCN7KfdVX1IjcBKo="/>
+    <resultPublishers disableAll="false"/>
+    <publishedResourceInfo>
+        <info domain="default" serverUrl="https://localhost:5443/RTCP"
+            vMajor="1" vMinor="0">
+            <resource id="-1e467d01:171c2dc91c6:-7dc9"/>
+        </info>
+    </publishedResourceInfo>
+</_c>

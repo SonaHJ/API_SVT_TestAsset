@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<editableResource createdTimestamp="1614012597685"
+    createdUser="RICHARD.LITTLEJR" id="-b689a4e:177ca90867a:-7d3a"
+    selfDescribing="in-stub123.10.134.59.250.nip.io (10.134.59.250) - JMX (default)"
+    type="probe_resource" updatedTimestamp="1614012597685"
+    updatedUser="RICHARD.LITTLEJR" version="1.0">
+    <loggingConfiguration debug="false" writeStubEventsToDB="false"/>
+    <resourceConfig defaultFlag="true" name="default"
+        physicalResourceID="-b689a4e:177ca90867a:-7d4a" probeID="ghviewer.plugin.jmx">
+        <JmxDatasource configuration="default"/>
+    </resourceConfig>
+</editableResource>

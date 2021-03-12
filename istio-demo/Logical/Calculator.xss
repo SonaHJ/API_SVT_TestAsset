@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?><editableResource createdTimestamp="1591964695716" createdUser="JAMES.THOMSON" id="6599c2e9:172a873e586:-7db6" selfDescribing="Calculator" type="xsd_schema" updatedTimestamp="1591964695716" updatedUser="JAMES.THOMSON" version="1.0">
+   <loggingConfiguration debug="false" writeStubEventsToDB="false"/>
+   <resourceConfig schemaSourceTemplateName="XSD">
+      <schemaSourceConfig sourceType="101" uri="C:\Users\james.thomson\Documents\Calculator.xsd"/>
+   </resourceConfig>
+</editableResource>
